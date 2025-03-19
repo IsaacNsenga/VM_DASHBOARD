@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GSM</title>
+    <title>VM GSM</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -60,8 +60,25 @@
                 </div>
                 <!-- Les pages du sidebar -->
                 <div class="navbar-nav w-100 text-start">
-                    <a href="{% url 'home' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{% url 'gsm' %}" class="nav-item nav-link active"><i class="fa fa-sim-card"></i>GSM</a>
+                    <a href="{% url 'home' %}" class="nav-item nav-link">
+                        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-sim-card"></i>Acquisitions GSM
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{% url 'vm_gsm' %}" class="dropdown-item active">
+                                <i class="fa fa-database me-2"></i>VM GSM
+                            </a>
+                            <a href="{% url 'superviseurs_gsm' %}" class="dropdown-item">
+                                <i class="fa fa-user-tie me-2"></i>Superviseurs
+                            </a>
+                            <a href="{% url 'coachs_mobiles_gsm' %}" class="dropdown-item">
+                                <i class="fa fa-users me-2"></i>Coachs Mobiles
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>

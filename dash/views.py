@@ -41,16 +41,26 @@ def user_logout(request):
     messages.success(request, 'Déconnexion réussie.')
     return redirect('signin') 
 
-
+@login_required
 def profil(request):
 
     return render(request, "profil.html")
 
-
-
+@login_required
 def home(request):
     return render(request, 'index.html')
 
-def gsm(request):
+@login_required
+def vm_gsm(request):
     context = {}
-    return render(request, 'gsm.html', context)
+    return render(request, 'vm_gsm.html', context)
+
+@login_required
+def superviseurs_gsm(request):
+    context = {}
+    return render(request, 'superviseurs_gsm.html', context)
+
+@login_required
+def coachs_mobiles_gsm(request):
+    context = {}
+    return render(request, 'coachs_mobiles_gsm.html', context)

@@ -9,7 +9,9 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path("profil/", views.profil, name="profil"),
     path('', views.home, name='home'),  
-    path('gsm/', views.gsm, name='gsm'),
+    path('vm_gsm/', views.vm_gsm, name='vm_gsm'),
+    path('superviseurs_gsm/', views.superviseurs_gsm, name='superviseurs_gsm'),
+    path('coachs_mobiles_gsm/', views.coachs_mobiles_gsm, name='coachs_mobiles_gsm'),
 ]
 
 from django.conf import settings
