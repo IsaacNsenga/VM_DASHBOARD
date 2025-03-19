@@ -2,7 +2,7 @@ asgiref==3.8.1
 Django==4.2.20
 mysqlclient==2.2.7
 narwhals==1.25.2
-numpy==2.2.2
+numpy==1.26.4
 packaging==24.2
 pandas==2.2.3
 pillow==11.1.0
