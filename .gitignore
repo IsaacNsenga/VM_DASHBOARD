@@ -1,0 +1,37 @@
+# Environnements virtuels
+venv/
+env/
+ENV/
+*.pyc
+__pycache__/
+
+# Fichiers/Dossiers spécifiques à Django
+*.sqlite3
+db.sqlite3
+*.log
+
+# Dossiers de config/déploiement
+*.env
+.env
+*.DS_Store
+
+# Fichiers IDE
+.vscode/
+.idea/
+
+# Dossiers compilés
+staticfiles/
+media/
+
+# Fichiers temporaires système
+*.swp
+*.tmp
+*~
+
+# Cache de coverage ou tests
+htmlcov/
+.coverage
+.tox/
+
+# Django migrations pycache
+**/migrations/__pycache__/
