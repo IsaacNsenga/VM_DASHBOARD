@@ -12,7 +12,7 @@ DB_CONFIG = {
 }
 
 # Charger le fichier Excel
-file_path = "VM - 20250331.xlsx"  # Chemin du fichier
+file_path = "VM - 2025.xlsx"  # Chemin du fichier
 sheet_name = "gross_add_sim"      # Nom de la feuille
 
 print("✅ Chargement du fichier Excel...")

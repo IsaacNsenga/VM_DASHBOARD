@@ -27,7 +27,7 @@ DB_CONFIG = {
 }
 
 # Charger le fichier Excel
-file_path = "VM - 20250331.xlsx"
+file_path = "VM - 2025.xlsx"
 sheet_name = "objectif_gsm"
 df = pd.read_excel(file_path, sheet_name=sheet_name)
 

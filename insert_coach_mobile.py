@@ -26,7 +26,7 @@ conn = pymysql.connect(
 )
 
 # Charger le fichier Excel
-file_path = "VM - 20250331.xlsx"  # Remplace par le bon fichier
+file_path = "VM - 2025.xlsx"  # Remplace par le bon fichier
 df = pd.read_excel(file_path, sheet_name="coach_mobile")
 
 # Vérifier si les colonnes nécessaires existent

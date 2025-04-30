@@ -12,7 +12,7 @@ DB_CONFIG = {
 }
 
 # Charger le fichier Excel
-file_path = "VM - 20250331.xlsx"  # Mets le chemin correct
+file_path = "VM - 2025.xlsx"  # Mets le chemin correct
 sheet_name = "all_sim"  # Feuille à importer
 
 df = pd.read_excel(file_path, sheet_name=sheet_name)
