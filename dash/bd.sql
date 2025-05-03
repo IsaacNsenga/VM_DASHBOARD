@@ -25,28 +25,30 @@ CREATE TABLE coach_mobile (
 
 -- Table pour enregistrer toutes les SIMs enregistrées par jour
 CREATE TABLE all_sim (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero_mpos VARCHAR(50) UNIQUE,
-    date_releve DATE NOT NULL UNIQUE,
+    numero_mpos VARCHAR(50),
+    date_releve DATE NOT NULL,
     total_sim INT NOT NULL,
+    PRIMARY KEY (numero_mpos, date_releve),
     FOREIGN KEY (numero_mpos) REFERENCES coach_mobile(numero_mpos) ON DELETE CASCADE
 );
+
 
 -- Table pour les SIMs acceptées par jour
 CREATE TABLE accepted_sim (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     numero_mpos VARCHAR(50),
     date_releve DATE NOT NULL,
     total_accepted INT NOT NULL,
+    PRIMARY KEY (numero_mpos, date_releve),
     FOREIGN KEY (numero_mpos) REFERENCES coach_mobile(numero_mpos) ON DELETE CASCADE
 );
 
+
 -- Table pour les Gross Add SIM par jour
 CREATE TABLE gross_add_sim (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero_mpos VARCHAR(50) UNIQUE ,
-    date_releve DATE NOT NULL UNIQUE ,
+    numero_mpos VARCHAR(50),
+    date_releve DATE NOT NULL,
     total_gross_add INT NOT NULL,
+    PRIMARY KEY (numero_mpos, date_releve),
     FOREIGN KEY (numero_mpos) REFERENCES coach_mobile(numero_mpos) ON DELETE CASCADE
 );
 
@@ -304,3 +306,41 @@ CREATE TABLE objectif_gsm (
     objectif INT,
     FOREIGN KEY (superviseur_id) REFERENCES superviseur(id)
 ) ENGINE=InnoDB;
+
+-- Création de la table des Canaux Alternatives (CA)
+CREATE TABLE canal_alternative (
+    numero_mpos VARCHAR(20) UNIQUE,
+    reg_user_name VARCHAR(50),
+    noms_prenoms VARCHAR(100),
+    id_superviseur INT,
+    PRIMARY KEY (numero_mpos),
+    FOREIGN KEY (id_superviseur) REFERENCES superviseur(id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+-- Table pour enregistrer toutes les SIMs enregistrées par jour
+CREATE TABLE all_sim_ca (
+    numero_mpos VARCHAR(50),
+    date_releve DATE NOT NULL,
+    total_sim INT NOT NULL,
+    PRIMARY KEY (numero_mpos, date_releve),
+    FOREIGN KEY (numero_mpos) REFERENCES canal_alternative(numero_mpos) ON DELETE CASCADE
+);
+
+
+-- Table pour les SIMs acceptées par jour
+CREATE TABLE accepted_sim_ca (
+    numero_mpos VARCHAR(50),
+    date_releve DATE NOT NULL,
+    total_accepted INT NOT NULL,
+    PRIMARY KEY (numero_mpos, date_releve),
+    FOREIGN KEY (numero_mpos) REFERENCES canal_alternative(numero_mpos) ON DELETE CASCADE
+);
+
+-- Table pour les Gross Add SIM par jour
+CREATE TABLE gross_add_sim_ca (
+    numero_mpos VARCHAR(50),
+    date_releve DATE NOT NULL,
+    total_gross_add INT NOT NULL,
+    PRIMARY KEY(numero_mpos, date_releve),
+    FOREIGN KEY (numero_mpos) REFERENCES canal_alternative(numero_mpos) ON DELETE CASCADE
+);
