@@ -12,6 +12,8 @@ urlpatterns = [
     path('vm_gsm/', views.vm_gsm, name='vm_gsm'),
     path('superviseurs_gsm/', views.superviseurs_gsm, name='superviseurs_gsm'),
     path('coachs_mobiles_gsm/', views.coachs_mobiles_gsm, name='coachs_mobiles_gsm'),
+    path('formulaire_rapport/', views.formulaire_rapport, name='formulaire_rapport'),
+    path('historique_rapport/', views.historique_rapport, name='historique_rapport'),
 ]
 
 from django.conf import settings

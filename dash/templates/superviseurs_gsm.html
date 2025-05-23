@@ -77,6 +77,12 @@
                             <a href="{% url 'coachs_mobiles_gsm' %}" class="dropdown-item">
                                 <i class="fa fa-users me-2"></i>Coachs Mobiles
                             </a>
+                            <a href="{% url 'formulaire_rapport' %}" class="dropdown-item">
+                            <i class="fa fa-edit me-2"></i>Formulaire
+                            </a>
+                            <a href="{% url 'historique_rapport' %}" class="dropdown-item">
+                                <i class="fa fa-history me-2"></i>Historique Rapport
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -188,10 +194,10 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Société VM</a>, Distributeur MTN - BZV SUD. 
+                            &copy; <a href="{% url 'home' %}">Société VM</a>, Distributeur MTN - BZV SUD. 
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://www.linkedin.com/in/isaac-nsengimana-075560290/">Isaac Nsenga</a>
+                            Designed By <a href="https://www.linkedin.com/in/isaac-nsengimana-075560290/" target="_blank">Isaac Nsenga</a>
                         </div>
                     </div>
                 </div>

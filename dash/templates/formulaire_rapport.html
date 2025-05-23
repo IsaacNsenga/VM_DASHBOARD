@@ -1,0 +1,463 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Formulaire</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <!-- Logo vm -->
+                <a href="{% url 'home' %}" class="navbar-brand mx-4 mb-3 w-100 text-center">
+                    <div class="d-flex justify-content-center w-100">
+                        <img src="{% static 'img/logo.png' %}" alt="logo" class="w-100">
+                    </div>
+                </a>
+                
+                <!-- DP Dashboard & Full Insights -->
+                <div class="w-100 text-center my-3">
+                    <h4 class="fw-bold mb-1 w-100">DP Dashboard</h4>
+                    <p class="text-muted mb-0 w-100" style="font-size: 14px;">Full Insights</p>
+                </div>
+                <!-- Les pages du sidebar -->
+                <div class="navbar-nav w-100 text-start">
+                    <a href="{% url 'home' %}" class="nav-item nav-link">
+                        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                    <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fa fa-sim-card"></i>Acquisitions GSM
+                    </a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="{% url 'vm_gsm' %}" class="dropdown-item">
+                            <i class="fa fa-database me-2"></i>VM GSM
+                        </a>
+                        <a href="{% url 'superviseurs_gsm' %}" class="dropdown-item">
+                            <i class="fa fa-user-tie me-2"></i>Superviseurs
+                        </a>
+                        <a href="{% url 'coachs_mobiles_gsm' %}" class="dropdown-item">
+                            <i class="fa fa-users me-2"></i>Coachs Mobiles
+                        </a>
+                        <a href="{% url 'formulaire_rapport' %}" class="dropdown-item active">
+                            <i class="fa fa-edit me-2"></i>Formulaire
+                        </a>
+                        <a href="{% url 'historique_rapport' %}" class="dropdown-item">
+                            <i class="fa fa-history me-2"></i>Historique Rapport
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <!-- Icone Home -->
+                <a href="{% url 'home' %}" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>                
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Message</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="{% static 'img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="{% static 'img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="{% static 'img/user.jpg' %}" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all message</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="{{ user.userprofile.profile_picture.url }}" alt="Photo de profil" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">{{ user.first_name }} {{ user.last_name }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'profil' %}" class="dropdown-item">Mon Profil</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item">Déconnexion</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+            <!-- Body Start -->
+
+            <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded p-4">
+                    <h4 class="mb-4 text-center">Rapport journalier superviseur acquisition</h4>
+
+                    <!-- Zone pour message succès / erreur -->
+        {% if messages %}
+            <div class="mb-3">
+                {% for message in messages %}
+                    <div class="alert 
+                        {% if message.tags == 'error' %}alert-danger
+                        {% elif message.tags == 'success' %}alert-success
+                        {% else %}alert-info
+                        {% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row g-4">
+                            <!-- Section 1 -->
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h6 class="text-center fs-10 mb-3">Informations Générales</h6>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Date d'enregistrement</label>
+                                        <input type="date" name="date_enregistrement" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                    <label class="form-label small">Lieu d'activité</label>
+                                        <select name="lieu_activite" class="form-select">
+                                            <option value="" disabled selected>Choisissez un lieu</option>
+                                            <option value="3 FRANCS">3 FRANCS</option>
+                                            <option value="ABATTOIR">ABATTOIR</option>
+                                            <option value="ANDRADE">ANDRADE</option>
+                                            <option value="AVENUE DES PYLONES">AVENUE DES PYLONES</option>
+                                            <option value="BACONGO">BACONGO</option>
+                                            <option value="BACONGO2">BACONGO2</option>
+                                            <option value="BACONGO3">BACONGO3</option>
+                                            <option value="BACONGO4">BACONGO4</option>
+                                            <option value="BARRAGE">BARRAGE</option>
+                                            <option value="BIFOUITI">BIFOUITI</option>
+                                            <option value="BIFOUITI IMPROVEMENT">BIFOUITI IMPROVEMENT</option>
+                                            <option value="BLANCHE GOMEZ">BLANCHE GOMEZ</option>
+                                            <option value="CAMP LA BASE">CAMP LA BASE</option>
+                                            <option value="CASE BARNIER">CASE BARNIER</option>
+                                            <option value="CASE BARNIER 2">CASE BARNIER 2</option>
+                                            <option value="CASE DE GAULE">CASE DE GAULE</option>
+                                            <option value="CENTRE GOTHIA">CENTRE GOTHIA</option>
+                                            <option value="CENTRE SPORTIF">CENTRE SPORTIF</option>
+                                            <option value="CFMC">CFMC</option>
+                                            <option value="CFMC2">CFMC2</option>
+                                            <option value="CFMC3">CFMC3</option>
+                                            <option value="CHATEAU D'EAU RELOCATION">CHATEAU D'EAU RELOCATION</option>
+                                            <option value="CITE DES 17">CITE DES 17</option>
+                                            <option value="CITE DES 17 2">CITE DES 17 2</option>
+                                            <option value="CORNICHE SUD">CORNICHE SUD</option>
+                                            <option value="DIATA1">DIATA1</option>
+                                            <option value="DIATA2">DIATA2</option>
+                                            <option value="DJOUE BRIDGE RELOCATION">DJOUE BRIDGE RELOCATION</option>
+                                            <option value="ECOLE PRIMAIRE MFILOU">ECOLE PRIMAIRE MFILOU</option>
+                                            <option value="FRONTIERE">FRONTIERE</option>
+                                            <option value="GLACIERE">GLACIERE</option>
+                                            <option value="KIBINA">KIBINA</option>
+                                            <option value="KIMPOUOMO">KIMPOUOMO</option>
+                                            <option value="KINGOUARI">KINGOUARI</option>
+                                            <option value="KINGOUARI IMPROVEMENT">KINGOUARI IMPROVEMENT</option>
+                                            <option value="KINGOUARI3">KINGOUARI3</option>
+                                            <option value="KINSOUDI2">KINSOUDI2</option>
+                                            <option value="KINSOUNDI">KINSOUNDI</option>
+                                            <option value="KISITO">KISITO</option>
+                                            <option value="KOMBE">KOMBE</option>
+                                            <option value="KOMBE CENTRE">KOMBE CENTRE</option>
+                                            <option value="KOMBE2">KOMBE2</option>
+                                            <option value="LA BASE">LA BASE</option>
+                                            <option value="LA BLED">LA BLED</option>
+                                            <option value="LA MILICE">LA MILICE</option>
+                                            <option value="LAAC">LAAC</option>
+                                            <option value="LYCEE SAVORGNANT">LYCEE SAVORGNANT</option>
+                                            <option value="MADIBOU1">MADIBOU1</option>
+                                            <option value="MADIBOU2">MADIBOU2</option>
+                                            <option value="MAFOUTA">MAFOUTA</option>
+                                            <option value="MAKANA (KINKALA ROUTE)">MAKANA (KINKALA ROUTE)</option>
+                                            <option value="MAKANA2 (PEAGE NGA)">MAKANA2 (PEAGE NGA)</option>
+                                            <option value="MARCHE BOURREAU">MARCHE BOURREAU</option>
+                                            <option value="MASSAMBA">MASSAMBA</option>
+                                            <option value="MASSINA">MASSINA</option>
+                                            <option value="MASSINA HELIOS">MASSINA HELIOS</option>
+                                            <option value="MASSINA2">MASSINA2</option>
+                                            <option value="MATOURS">MATOURS</option>
+                                            <option value="MAYANGA">MAYANGA</option>
+                                            <option value="MAYANGA WARID">MAYANGA WARID</option>
+                                            <option value="MAYANGA2">MAYANGA2</option>
+                                            <option value="MAYINGA">MAYINGA</option>
+                                            <option value="MAYINGA2">MAYINGA2</option>
+                                            <option value="MAYINGA3">MAYINGA3</option>
+                                            <option value="MAYINGA4">MAYINGA4</option>
+                                            <option value="MBOUONO">MBOUONO</option>
+                                            <option value="MFILOU 5">MFILOU 5</option>
+                                            <option value="MFILOU LYCEE">MFILOU LYCEE</option>
+                                            <option value="MFILOU MONTAGNE">MFILOU MONTAGNE</option>
+                                            <option value="MFILOU1">MFILOU1</option>
+                                            <option value="MFILOU2">MFILOU2</option>
+                                            <option value="MFILOU3">MFILOU3</option>
+                                            <option value="MFILOU4">MFILOU4</option>
+                                            <option value="MICHEL KOLELAS">MICHEL KOLELAS</option>
+                                            <option value="MINISTERE DU PLAN">MINISTERE DU PLAN</option>
+                                            <option value="MOUKOUNDZI NGOUAKA">MOUKOUNDZI NGOUAKA</option>
+                                            <option value="MOUTABALA">MOUTABALA</option>
+                                            <option value="MPISSA">MPISSA</option>
+                                            <option value="MPISSA2">MPISSA2</option>
+                                            <option value="NEW OMS">NEW OMS</option>
+                                            <option value="NGAMPOKO">NGAMPOKO</option>
+                                            <option value="NKEWA">NKEWA</option>
+                                            <option value="OMBRE">OMBRE</option>
+                                            <option value="OMNISPORTS">OMNISPORTS</option>
+                                            <option value="OMS">OMS</option>
+                                            <option value="OMS OFFICE">OMS OFFICE</option>
+                                            <option value="PRESIDENCE">PRESIDENCE</option>
+                                            <option value="SADELMI">SADELMI</option>
+                                            <option value="SADELMI2">SADELMI2</option>
+                                            <option value="SANGOLO">SANGOLO</option>
+                                            <option value="ST PIERRE BZV">ST PIERRE BZV</option>
+                                            <option value="TCHIELAMPO">TCHIELAMPO</option>
+                                            <option value="TDC">TDC</option>
+                                            <option value="TERMINUS SADELMI">TERMINUS SADELMI</option>
+                                            <option value="YOULOU">YOULOU</option>
+                                            <option value="ZOO">ZOO</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Stock SIM activées</label>
+                                        <input type="number" name="stock_sim_activees" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Stock SIM blanches</label>
+                                        <input type="number" name="stock_sim_blanches" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">SIM approvisionnées</label>
+                                        <input type="number" name="sim_appro" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 2 -->
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h6 class="text-center fs-10 mb-3">Réalisations</h6>
+                                    <div class="mb-2">
+                                        <label class="form-label small">GSM</label>
+                                        <input type="number" name="gsm" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Momo App</label>
+                                        <input type="number" name="momo_app" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">MyMTN</label>
+                                        <input type="number" name="mymtn" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Ayoba</label>
+                                        <input type="number" name="ayoba" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 3 -->
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h6 class="text-center fs-10 mb-3">Vente Devices</h6>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Téléphone</label>
+                                        <input type="number" name="telephone" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Modem</label>
+                                        <input type="number" name="modem" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Mifi</label>
+                                        <input type="number" name="mifi" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Wifix</label>
+                                        <input type="number" name="wifix" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section 4 -->
+                            <div class="col-md-6">
+                                <div class="border rounded p-3 h-100">
+                                    <h6 class="text-center fs-10 mb-3">Commentaires</h6>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Difficultés</label>
+                                        <textarea name="difficulte" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Momo Convertion</label>
+                                        <input type="number" name="momo_convertion" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Reset PIN</label>
+                                        <input type="number" name="resetpin" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Prospection CA</label>
+                                        <input type="number" name="prospection_ca" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Besoins</label>
+                                        <textarea name="besoin" class="form-control" required></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label small">Veille concurrentielle</label>
+                                        <textarea name="concurrentielle" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Soumettre</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Form End -->
+            
+            <!-- Body End -->
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="{% url 'home' %}">Société VM</a>, Distributeur MTN - BZV SUD. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By <a href="https://www.linkedin.com/in/isaac-nsengimana-075560290/" target="_blank">Isaac Nsenga</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/chart/chart.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
