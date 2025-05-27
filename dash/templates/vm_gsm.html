@@ -191,7 +191,10 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Single Line Chart</h6>
-                            <canvas id="line-chart"></canvas>
+                            <canvas id="line-chart"
+                                    data-labels='{{ gross_add_labels|safe }}'
+                                    data-data='{{ gross_add_data|safe }}'>
+                            </canvas>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6">
@@ -264,36 +267,8 @@
     <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 
     
-    <script>
-        // Données dynamiques envoyées depuis Django
-        const labelsGrossAdd = {{ gross_add_labels|safe }};
-        const dataGrossAdd = {{ gross_add_data|safe }};
-
-        const ctx3 = document.getElementById("line-chart").getContext("2d");
-        new Chart(ctx3, {
-            type: "line",
-            data: {
-                labels: labelsGrossAdd,
-                datasets: [{
-                    label: "Gross Adds",
-                    fill: false,
-                    backgroundColor: "rgba(0, 156, 255, .3)",
-                    borderColor: "rgba(0, 156, 255, 1)",
-                    data: dataGrossAdd
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-
     <!-- Template Javascript -->
+    <script src="{% static 'js/graphe.js' %}"></script> 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 

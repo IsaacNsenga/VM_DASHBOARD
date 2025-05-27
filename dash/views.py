@@ -63,25 +63,24 @@ def profil(request):
 def home(request):
     return render(request, 'index.html')
 
-
 @login_required
 def vm_gsm(request):
-    # Agréger les gross add par mois
+    # Agréger les Gross Add par mois depuis GrossAddSim
     gross_adds_par_mois = (
-        SyntheseGsm.objects
-        .annotate(mois=TruncMonth('date_jour'))
+        GrossAddSim.objects
+        .annotate(mois=TruncMonth('date_releve'))
         .values('mois')
-        .annotate(total_gross_add=Sum('total_gross_add_sim'))
+        .annotate(total_gross_add=Sum('total_gross_add'))
         .order_by('mois')
     )
 
-    # Transformer pour le frontend
+    # Transformer les données pour le frontend
     labels = [g['mois'].strftime('%B %Y') for g in gross_adds_par_mois]
     data = [g['total_gross_add'] for g in gross_adds_par_mois]
 
     context = {
-        'gross_add_labels': json.dumps(labels),  # Convertir en JSON string
-        'gross_add_data': json.dumps(data),      # Convertir en JSON string
+        'gross_add_labels': json.dumps(labels),  # 🔄 Converti en JSON pour le JS
+        'gross_add_data': json.dumps(data),
     }
 
     return render(request, 'vm_gsm.html', context)
