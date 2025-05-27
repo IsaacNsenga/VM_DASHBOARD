@@ -185,153 +185,48 @@
 
             <!-- Body Start -->
 
-            <!-- Sale & Revenue Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <!-- Total ALL SIM -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-sim-card fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2" style="font-size: 14px;">All SIM</p>
-                                <h6 class="mb-0">{{ total_all_sim }}</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Accepted SIM -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-check-circle fa-3x text-success"></i>
-                            <div class="ms-3">
-                                <p class="mb-2" style="font-size: 14px;">Accepted SIM</p>
-                                <h6 class="mb-0">{{ total_accepted_sim }}</h6>
-                                <!-- Taux Accepted -->
-                                <p class="mb-0 fw-bold {{ accepted_class }}" style="font-size: 13px;">
-                                    {{ accepted_rate|floatformat:2 }}%
-                                </p>                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Total Gross Add SIM -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-plus-circle fa-3x text-warning"></i>
-                            <div class="ms-3">
-                                <p class="mb-2" style="font-size: 14px;">Gross Add</p>
-                                <h6 class="mb-0">{{ total_gross_add_sim }}</h6>
-                                <!-- Taux Gross Add -->
-                                <p class="mb-0 fw-bold {{ gross_add_class }}" style="font-size: 13px;">
-                                    {{ gross_add_rate|floatformat:2 }}%
-                                </p> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Date Filter -->
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-center p-4">
-                            <form method="get" class="w-100">
-                                <label for="summary_date" class="form-label" style="font-size: 14px;">Choisir une date</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" id="summary_date" name="summary_date" value="{{ summary_date }}">
-                                    <button type="submit" class="btn btn-primary">Filtrer</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Sale & Revenue End -->
-
             <!-- Chart Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4 text-center">Répartition globale des segments de drip</h6>
-                            <form method="get" class="mb-3">
-                                <div class="row g-2 align-items-end">
-                                    <div class="col-md-10">
-                                        <label for="selected_date_drip" class="form-label" style="font-size: 12px;">Choisir une date</label>
-                                        <input type="date" class="form-control" id="selected_date_drip" name="selected_date_drip" value="{{ selected_date_drip }}">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="btn btn-primary w-100">Filtrer</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="card" style="height: 100%;">
-                                <div class="card-body d-flex justify-content-center align-items-center">
-                                    <div style="width: 100%; height: 100%;">
-                                        {{ drip_chart|safe }}
-                                    </div>
-                                </div>
-                            </div>
+                            <h6 class="mb-4">Single Line Chart</h6>
+                            <canvas id="line-chart"></canvas>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4 text-center">Productivité Moyenne par Drip</h6>
-                            <form method="get" class="mb-3">
-                                <div class="row g-2 align-items-end">
-                                    <div class="col-md-10">
-                                        <label for="selected_date_productivity" class="form-label" style="font-size: 12px;">Choisir une date</label>
-                                        <input type="date" class="form-control" id="selected_date_productivity" name="selected_date_productivity" value="{{ selected_date_productivity }}">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="btn btn-primary w-100">Filtrer</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="card" style="height: 100%;">
-                                <div class="card-body d-flex justify-content-center align-items-center">
-                                    <div style="width: 100%; height: 100%;">
-                                        {{ productivity_chart|safe }}
-                                    </div>
-                                </div>
-                            </div>
+                            <h6 class="mb-4">Multiple Line Chart</h6>
+                            <canvas id="salse-revenue"></canvas>
                         </div>
-                    </div>                                        
-                </div>
-            </div>
-            <!-- Chart End -->
-
-            <!-- Chart Start 1 -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-12">
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4 text-center">Gross Add Sim & Taux de CM Actifs par Date</h6>
-                            <form method="get" class="mb-3">
-                                <div class="row g-2 align-items-end">
-                                    <div class="col-md-5">
-                                        <label for="start_date" class="form-label" style="font-size: 12px;">Début de période</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ start_date }}">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label for="end_date" class="form-label" style="font-size: 12px;">Fin de période</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ end_date }}">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="btn btn-primary w-100">Filtrer</button>
-                                    </div>
-                                </div>
-                            </form>                            
-                            <div class="card" style="height: 100%;">
-                                <div class="card-body d-flex justify-content-center align-items-center">
-                                    <div style="width: 100%; height: 100%;">
-                                        {{ combo_chart|safe }}    
-                                    </div>
-                                </div>
-                            </div>
+                            <h6 class="mb-4">Single Bar Chart</h6>
+                            <canvas id="bar-chart"></canvas>
                         </div>
-                    </div>                                        
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Multiple Bar Chart</h6>
+                            <canvas id="worldwide-sales"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Pie Chart</h6>
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Doughnut Chart</h6>
+                            <canvas id="doughnut-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Chart End 1 -->
-         
+            <!-- Chart End -->         
 
             <!-- Body End -->
 
@@ -367,6 +262,36 @@
     <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
     <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    
+    <script>
+        // Données dynamiques envoyées depuis Django
+        const labelsGrossAdd = {{ gross_add_labels|safe }};
+        const dataGrossAdd = {{ gross_add_data|safe }};
+
+        const ctx3 = document.getElementById("line-chart").getContext("2d");
+        new Chart(ctx3, {
+            type: "line",
+            data: {
+                labels: labelsGrossAdd,
+                datasets: [{
+                    label: "Gross Adds",
+                    fill: false,
+                    backgroundColor: "rgba(0, 156, 255, .3)",
+                    borderColor: "rgba(0, 156, 255, 1)",
+                    data: dataGrossAdd
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
