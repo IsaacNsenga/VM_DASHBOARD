@@ -185,51 +185,75 @@
 
             <!-- Body Start -->
 
-            <!-- Chart Start -->
+            <!-- Chart Section Start -->
             <div class="container-fluid pt-4 px-4">
+                <form method="get" class="mb-4">
+                    <label for="month">Mois :</label>
+                    <select name="month" id="month" class="form-select d-inline w-auto">
+                        {% for numero, nom in mois_disponibles %}
+                            <option value="{{ numero }}" {% if mois_selectionne == numero|stringformat:"s" %}selected{% endif %}>
+                                {{ nom }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                </form>
+
                 <div class="row g-4">
+                    <!-- 1. Gross add journalier, Gross add month-1 & % CM Actifs -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Single Line Chart</h6>
-                            <canvas id="line-chart"
-                                    data-labels='{{ gross_add_labels|safe }}'
-                                    data-data='{{ gross_add_data|safe }}'>
+                            <h6 class="mb-4 text-center">Gross add journalier, Gross add month-1 & % CM Actifs</h6>
+                            <canvas
+                                id="chart-grossadd-combo"
+                                data-labels='{{ labels_grossadd_combo|safe }}'
+                                data-data='{{ gross_add_journalier|safe }}'>
                             </canvas>
                         </div>
                     </div>
+
+                    <!-- 2. Gross add par arrondissement -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Multiple Line Chart</h6>
-                            <canvas id="salse-revenue"></canvas>
+                            <h6 class="mb-4 text-center">Gross add par arrondissement</h6>
+                            <canvas id="chart-grossadd-arrondissement"></canvas>
                         </div>
                     </div>
+
+                    <!-- 3. % CM actifs & Productivité journalier -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Single Bar Chart</h6>
-                            <canvas id="bar-chart"></canvas>
+                            <h6 class="mb-4 text-center">% CM actifs & Productivité journalier</h6>
+                            <canvas id="chart-cm-productivite"></canvas>
                         </div>
                     </div>
+
+                    <!-- 4. Drip -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Multiple Bar Chart</h6>
-                            <canvas id="worldwide-sales"></canvas>
+                            <h6 class="mb-4 text-center">Drip</h6>
+                            <canvas id="chart-drip"></canvas>
                         </div>
                     </div>
+
+                    <!-- 5. Productivité par segment drip -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Pie Chart</h6>
-                            <canvas id="pie-chart"></canvas>
+                            <h6 class="mb-4 text-center">Productivité par segment drip</h6>
+                            <canvas id="chart-productivite-segment"></canvas>
                         </div>
                     </div>
+
+                    <!-- 6. Gross add par segment drip -->
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Doughnut Chart</h6>
-                            <canvas id="doughnut-chart"></canvas>
+                            <h6 class="mb-4 text-center">Gross add par segment drip</h6>
+                            <canvas id="chart-grossadd-segment"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Chart End -->         
+            <!-- Chart Section End -->
 
             <!-- Body End -->
 

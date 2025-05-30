@@ -8,11 +8,24 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Arrondissement(models.Model):
+    nom = models.CharField(max_length=100)
+    ville = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.nom} - {self.ville}"
+
+    class Meta:
+        db_table = 'arrondissement'
+        managed = False
+
 class Superviseur(models.Model):
     prenom = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
     adresse_mail = models.EmailField(max_length=100, unique=True)
     numero_telephone = models.CharField(max_length=20, unique=True)
+    id_arrondissement = models.ForeignKey(
+        Arrondissement, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.prenom} {self.nom}"
@@ -111,7 +124,6 @@ class SyntheseGsm(models.Model):
         unique_together = ('numero_mpos', 'date_jour')
         managed = False
 
-
 class ObjectifGsm(models.Model):
     superviseur = models.OneToOneField(Superviseur, on_delete=models.CASCADE)
     mois = models.DateField(unique=True)
@@ -154,7 +166,6 @@ class supervisor_report(models.Model):
     class Meta:
         db_table = 'supervisor_report'
         managed = False  # 👉 Très important !
-
 
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

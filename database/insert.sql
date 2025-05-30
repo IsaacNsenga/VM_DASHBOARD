@@ -1,14 +1,22 @@
-INSERT INTO superviseur (prenom, nom, adresse_mail, numero_telephone) VALUES
-('AYMARD', 'BANTSIMBA', 'bantsimba.aymard@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('JUDEL', 'BATOUMOUENI', 'batoumoueni.judel@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('SERGES', 'BAZONZAMIO', 'bazonzamio.serges@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('HERMAN', 'ETOU', 'etou.herman@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('RY', 'KOMBO MBOUAKA', 'kombo.mbouaka.ry@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('JORDEIL', 'MAHOUMA', 'mahouma.jordeil@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('JOSLAIN', 'MALONGA', 'malonga.joslain@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('CHRIST', 'MBOUNGOU', 'mboungou.christ@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('ABEL', 'MOUKENGUE', 'moukengue.abel@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000))),
-('JOB', 'TOUMBA', 'toumba.job@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)));
+-- Insertion des données arrondissement
+INSERT INTO arrondissement (id, nom, ville) VALUES
+(1, 'Makélékélé', 'Brazzaville'),
+(2, 'Bacongo', 'Brazzaville'),
+(3, 'Madibou', 'Brazzaville'),
+(4, 'Mfilou', 'Brazzaville'),
+(5, 'Pool', 'Pool');
+
+INSERT INTO superviseur (prenom, nom, adresse_mail, numero_telephone, id_arrondissement) VALUES
+('AYMARD', 'BANTSIMBA', 'bantsimba.aymard@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 3),
+('JUDEL', 'BATOUMOUENI', 'batoumoueni.judel@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 1),
+('SERGES', 'BAZONZAMIO', 'bazonzamio.serges@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 5),
+('HERMAN', 'ETOU', 'etou.herman@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 1),
+('RY', 'KOMBO MBOUAKA', 'kombo.mbouaka.ry@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 4),
+('JORDEIL', 'MAHOUMA', 'mahouma.jordeil@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 2),
+('JOSLAIN', 'MALONGA', 'malonga.joslain@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 3),
+('CHRIST', 'MBOUNGOU', 'mboungou.christ@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 4),
+('ABEL', 'MOUKENGUE', 'moukengue.abel@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 1),
+('JOB', 'TOUMBA', 'toumba.job@gmail.com', CONCAT('24206', FLOOR(RAND() * 10000000)), 4);
 
 -- Insertion des données dans la table jours fériés
 INSERT INTO jours_feries (date_ferie) VALUES
@@ -19,6 +27,7 @@ INSERT INTO jours_feries (date_ferie) VALUES
 ('2025-08-15'),
 ('2025-11-28'), 
 ('2025-12-25'); 
+
 
 SELECT 
     CONCAT(s.prenom, ' ', s.nom) AS superviseur,

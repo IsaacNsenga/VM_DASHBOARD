@@ -3,13 +3,22 @@ CREATE DATABASE dashboard
 DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
 
+-- Création de la table des Arrondissements
+CREATE TABLE arrondissement (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    ville VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
+
 -- Création de la table des Superviseurs
 CREATE TABLE superviseur (
     id INT AUTO_INCREMENT PRIMARY KEY,
     prenom VARCHAR(50),
     nom VARCHAR(50),
     adresse_mail VARCHAR(100) UNIQUE,
-    numero_telephone VARCHAR(20) UNIQUE
+    numero_telephone VARCHAR(20) UNIQUE,
+    id_arrondissement INT,
+    FOREIGN KEY (id_arrondissement) REFERENCES arrondissement(id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- Création de la table des Coachs Mobiles (CM)

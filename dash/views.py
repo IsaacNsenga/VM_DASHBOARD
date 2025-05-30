@@ -4,19 +4,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from django.db import models
-import plotly.graph_objs as go
-from collections import Counter
-from django.db.models import Sum, Max 
+from django.db.models import Sum
 import json
-from django.db.models.functions import TruncMonth
-from datetime import datetime
-from .models import Notification, supervisor_report, SyntheseGsm, AllSim, CoachMobile, GrossAddSim
+from .models import Notification, supervisor_report, GrossAddSim
 import openpyxl
 from django.http import HttpResponse
 from django.utils.timezone import now
 from django.utils.timesince import timesince
-
+from django.db.models.functions import ExtractMonth
+import calendar
 
 def signin(request):
     if request.method == 'POST':
@@ -29,7 +25,6 @@ def signin(request):
         else:
             messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
     return render(request, 'signin.html')
-
 
 def passwordreset(request):
     if request.method == 'POST':
@@ -65,22 +60,43 @@ def home(request):
 
 @login_required
 def vm_gsm(request):
-    # Agréger les Gross Add par mois depuis GrossAddSim
-    gross_adds_par_mois = (
-        GrossAddSim.objects
-        .annotate(mois=TruncMonth('date_releve'))
-        .values('mois')
-        .annotate(total_gross_add=Sum('total_gross_add'))
-        .order_by('mois')
+    queryset = GrossAddSim.objects.all()
+
+    # Extraire les mois distincts disponibles (numéro + nom)
+    mois_numeros = (
+        queryset
+        .annotate(month=ExtractMonth('date_releve'))
+        .values_list('month', flat=True)
+        .distinct()
+        .order_by('month')
     )
 
-    # Transformer les données pour le frontend
-    labels = [g['mois'].strftime('%B %Y') for g in gross_adds_par_mois]
-    data = [g['total_gross_add'] for g in gross_adds_par_mois]
+    # Créer la liste des mois sous forme de tuples (numéro, nom)
+    mois_disponibles = [(mois, calendar.month_name[mois]) for mois in mois_numeros if mois]
+
+    # Définir le mois sélectionné par défaut : le dernier mois avec données (max des mois disponibles)
+    default_mois = str(max(mois_numeros)) if mois_numeros else ""
+    month = request.GET.get('month', default_mois)
+
+    if month:
+        queryset = queryset.filter(date_releve__month=month)
+
+    # Agrégation par jour
+    gross_adds_by_day = (
+        queryset
+        .values('date_releve')
+        .annotate(total=Sum('total_gross_add'))
+        .order_by('date_releve')
+    )
+
+    labels = [entry['date_releve'].strftime('%d-%m') for entry in gross_adds_by_day]
+    data = [entry['total'] for entry in gross_adds_by_day]
 
     context = {
-        'gross_add_labels': json.dumps(labels),  # 🔄 Converti en JSON pour le JS
-        'gross_add_data': json.dumps(data),
+        'labels_grossadd_combo': json.dumps(labels),
+        'gross_add_journalier': json.dumps(data),
+        'mois_disponibles': mois_disponibles,  # Liste de tuples (numéro, nom)
+        'mois_selectionne': month,
     }
 
     return render(request, 'vm_gsm.html', context)
